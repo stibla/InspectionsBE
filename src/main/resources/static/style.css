@@ -1,0 +1,18 @@
+.dropFiles {
+    width: 80%;
+    min-height: 100px; 
+    height: auto; 
+    border: 5px red dashed; 
+    text-align: center;
+    font-size: 25px;
+    margin: 0 auto;
+  }
+  
+  .highlightDropArea {
+    border: 5px green dashed;
+  }
+
+  #file{
+    display: none;
+  }
+  
