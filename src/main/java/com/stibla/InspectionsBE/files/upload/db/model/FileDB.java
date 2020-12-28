@@ -16,10 +16,9 @@ public class FileDB {
   @GeneratedValue(generator = "uuid")
   @GenericGenerator(name = "uuid", strategy = "uuid2")
   private String id;
-
   private String name;
-
   private String type;
+  private long n_inspection_id;
 
   @Lob
   private byte[] data;
@@ -30,10 +29,11 @@ public class FileDB {
   public FileDB() {
   }
 
-  public FileDB(String name, String type, byte[] data) {
+  public FileDB(String name, String type, byte[] data, long n_inspection_id) {
     this.name = name;
     this.type = type;
     this.data = data;
+    this.n_inspection_id = n_inspection_id;
   }
 
   public String getId() {
@@ -70,6 +70,14 @@ public class FileDB {
 
   public void setPdfContent(String pdfContent){
     this.pdfContent = pdfContent;
+  }
+
+  public long getN_inspection_id() {
+    return n_inspection_id;
+  }
+
+  public void setN_inspection_id(long n_inspection_id){
+    this.n_inspection_id = n_inspection_id;
   }
 
 }

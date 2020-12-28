@@ -10,26 +10,26 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import com.stibla.InspectionsBE.files.upload.db.message.ResponseFile;
+import com.stibla.InspectionsBE.files.upload.db.message.ResponseMessage;
+import com.stibla.InspectionsBE.files.upload.db.model.FileDB;
+import com.stibla.InspectionsBE.files.upload.db.service.FileStorageService;
+import com.stibla.InspectionsBE.pdf.PdfGetText;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import com.stibla.InspectionsBE.files.upload.db.service.FileStorageService;
-import com.stibla.InspectionsBE.files.upload.db.message.ResponseFile;
-import com.stibla.InspectionsBE.files.upload.db.message.ResponseMessage;
-import com.stibla.InspectionsBE.files.upload.db.model.FileDB;
-import com.stibla.InspectionsBE.pdf.PdfGetText;
 
 
 @Controller
@@ -40,10 +40,10 @@ public class FileController {
   private FileStorageService storageService;
 
   @PostMapping("/upload")
-  public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
+  public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("n_inspection_id") Long n_inspection_id) {
     String message = "";
     try {
-      storageService.store(file);
+      storageService.store(file, n_inspection_id);
 
       message = "Uploaded the file successfully: " + file.getOriginalFilename();
       return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
@@ -59,8 +59,19 @@ public class FileController {
       String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/").path(dbFile.getId())
           .toUriString();
 
-      return new ResponseFile(dbFile.getId(), dbFile.getName(), fileDownloadUri, dbFile.getType(),
-          dbFile.getData().length);
+      return new ResponseFile(dbFile.getId(), dbFile.getName(), fileDownloadUri, dbFile.getType(), dbFile.getData().length, dbFile.getN_inspection_id());
+    }).collect(Collectors.toList());
+
+    return ResponseEntity.status(HttpStatus.OK).body(files);
+  }
+
+  @GetMapping("/inspections/files/{id}")
+  public ResponseEntity<List<ResponseFile>> getInspectionListFiles(@PathVariable long id) {
+    List<ResponseFile> files = storageService.getFilesByInspectionId(id).map(dbFile -> {
+      String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/files/").path(dbFile.getId())
+          .toUriString();
+
+      return new ResponseFile(dbFile.getId(), dbFile.getName(), fileDownloadUri, dbFile.getType(), dbFile.getData().length, dbFile.getN_inspection_id());
     }).collect(Collectors.toList());
 
     return ResponseEntity.status(HttpStatus.OK).body(files);
@@ -69,8 +80,6 @@ public class FileController {
   @GetMapping("/files/{id}")
   public ResponseEntity<byte[]> getFile(@PathVariable String id) {
     FileDB fileDB = storageService.getFile(id);
-    // logger.info("this is a info message " + id + PdfGetText.getText(new File(
-    // ("C:\\Users\\Administrator\\Downloads\\application.pdf"))) );
     return ResponseEntity.ok()
         .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDB.getName() + "\"")
         .body(fileDB.getData());

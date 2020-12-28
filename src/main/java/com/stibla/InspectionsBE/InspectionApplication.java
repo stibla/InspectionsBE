@@ -1,13 +1,13 @@
-package com.stibla.InspectionsBE.files.upload.db;
+package com.stibla.InspectionsBE;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringBootUploadFilesDatabaseApplication {
+public class InspectionApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringBootUploadFilesDatabaseApplication.class, args);
+		SpringApplication.run(InspectionApplication.class, args);
 	}
 
 }
