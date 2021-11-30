@@ -1,6 +1,6 @@
 package com.stibla.InspectionsBE.files.upload.db.model;
 
-import javax.persistence.Column;
+//import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -23,8 +23,8 @@ public class FileDB {
   @Lob
   private byte[] data;
 
-  @Column(columnDefinition = "TEXT")
-  private String pdfContent;
+  //@Column(columnDefinition = "TEXT")
+  //private String pdfContent;
 
   public FileDB() {
   }
@@ -64,13 +64,13 @@ public class FileDB {
     this.data = data;
   }
 
-  public String getPdfContent() {
+  /*public String getPdfContent() {
     return pdfContent;
   }
 
   public void setPdfContent(String pdfContent){
     this.pdfContent = pdfContent;
-  }
+  }*/
 
   public long getN_inspection_id() {
     return n_inspection_id;

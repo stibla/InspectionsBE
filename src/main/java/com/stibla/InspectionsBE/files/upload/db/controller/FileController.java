@@ -6,8 +6,8 @@ package com.stibla.InspectionsBE.files.upload.db.controller;
 //logger.info("this is a info message " + id + PdfGetText.getText(fileDB.getData()));
 
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+//import java.util.regex.Matcher;
+//import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import com.stibla.InspectionsBE.files.upload.db.message.ResponseFile;
@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+//import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -95,7 +95,7 @@ public class FileController {
     }
   }
 
-  @PutMapping("/files/{id}")
+ /* @PutMapping("/files/{id}")
   public ResponseEntity<ResponseMessage> updateFile(@PathVariable("id") String id) {
 
     String message = "";
@@ -119,6 +119,6 @@ public class FileController {
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseMessage(message));
     }
 
-  }
+  }*/
 
 }
