@@ -18,9 +18,9 @@ public class FileStorageService {
   @Autowired
   private FileDBRepository fileDBRepository;
 
-  public FileDB store(MultipartFile file, Long n_inspection_id) throws IOException {
+  public FileDB store(MultipartFile file, Long inspectionId) throws IOException {
     String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-    FileDB FileDB = new FileDB(fileName, file.getContentType(), file.getBytes(), n_inspection_id);
+    FileDB FileDB = new FileDB(fileName, file.getContentType(), file.getBytes(), inspectionId);
 
     return fileDBRepository.save(FileDB);
   }
@@ -33,9 +33,9 @@ public class FileStorageService {
     return fileDBRepository.findAll().stream();
   }
 
-  public Stream<FileDB> getFilesByInspectionId(long n_inspection_id) {
+  public Stream<FileDB> getFilesByInspectionId(long inspectionId) {
     FileDB file = new FileDB();
-    file.setN_inspection_id(n_inspection_id);
+    file.setN_inspection_id(inspectionId);
     Example<FileDB> fileExample = Example.of(file);
     return fileDBRepository.findAll(fileExample).stream();
   }

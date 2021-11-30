@@ -6,15 +6,15 @@ public class ResponseFile {
   private String url;
   private String type;
   private long size;
-  private long n_inspection_id;
+  private long inspectionId;
 
-  public ResponseFile(String id, String name, String url, String type, long size, long n_inspection_id) {
+  public ResponseFile(String id, String name, String url, String type, long size, long inspectionId) {
     this.id = id;
     this.name = name;
     this.url = url;
     this.type = type;
     this.size = size;
-    this.n_inspection_id = n_inspection_id;
+    this.inspectionId = inspectionId;
   }
 
   public String getId() {
@@ -57,12 +57,12 @@ public class ResponseFile {
     this.size = size;
   }
 
-  public long getN_inspection_id() {
-    return n_inspection_id;
+  public long getInspectionId() {
+    return inspectionId;
   }
 
-  public void setN_inspection_id(long n_inspection_id) {
-    this.n_inspection_id = n_inspection_id;
+  public void setInspectionId(long inspectionId) {
+    this.inspectionId = inspectionId;
   }
 
 }

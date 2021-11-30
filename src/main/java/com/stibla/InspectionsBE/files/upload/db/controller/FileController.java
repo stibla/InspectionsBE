@@ -14,7 +14,7 @@ import com.stibla.InspectionsBE.files.upload.db.message.ResponseFile;
 import com.stibla.InspectionsBE.files.upload.db.message.ResponseMessage;
 import com.stibla.InspectionsBE.files.upload.db.model.FileDB;
 import com.stibla.InspectionsBE.files.upload.db.service.FileStorageService;
-import com.stibla.InspectionsBE.pdf.PdfGetText;
+//import com.stibla.InspectionsBE.pdf.*; 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -40,10 +40,10 @@ public class FileController {
   private FileStorageService storageService;
 
   @PostMapping("/upload")
-  public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("n_inspection_id") Long n_inspection_id) {
+  public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("inspectionId") Long inspectionId) {
     String message = "";
     try {
-      storageService.store(file, n_inspection_id);
+      storageService.store(file, inspectionId);
 
       message = "Uploaded the file successfully: " + file.getOriginalFilename();
       return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
@@ -101,7 +101,7 @@ public class FileController {
     String message = "";
     try {
       FileDB fileDB = storageService.getFile(id);      
-      message = PdfGetText.getText(fileDB.getData());
+      message = com.stibla.InspectionsBE.pdf.PdfGetText.getText(fileDB.getData());
       fileDB.setPdfContent(message);
       storageService.Save(fileDB);
       //storageService.updatePdfText(id, message);
@@ -115,7 +115,7 @@ public class FileController {
       message = "Update the file successfully" + message;
       return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
     } catch (Exception e) {
-      message = "Could not update the file" + message;
+      message = "Could not update the file!" + message;
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseMessage(message));
     }
 

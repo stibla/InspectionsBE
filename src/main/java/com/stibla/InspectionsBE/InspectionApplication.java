@@ -12,4 +12,4 @@ public class InspectionApplication {
 
 }
 
-//mvnw spring-boot:run
+//mvnw spring-boot:run - ukoncenie ctrl + C
