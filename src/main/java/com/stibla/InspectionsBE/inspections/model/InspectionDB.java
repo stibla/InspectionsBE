@@ -17,8 +17,6 @@ public class InspectionDB {
 
      private String sInspectionNumber;
 
-     private String sFileId;     
-
      @Column(columnDefinition = "TEXT")
      private String sPdfContent;
 
@@ -165,15 +163,6 @@ public class InspectionDB {
 
     public void SetsInspectionNumber(String sInspectionNumber) {
       this.sInspectionNumber = sInspectionNumber;
-    }
-
-    
-    public String getsFileId() {
-      return sFileId;
-    }
-  
-    public void setsFileId(String sFileId){
-      this.sFileId = sFileId;
     }
 
      public String getsPdfContent() {

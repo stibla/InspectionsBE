@@ -125,9 +125,9 @@ function fetchInspection() {
           '<td>' + inspection.type + '</a></td>' +
           '<td>' + inspection.size + '</td>' + 
           '<td>' + '<button' + ' id=' + '\"btn_delete_' + inspection.id + '\"' +
-          ' type="button" class="btn btn-danger btn_delete">X</button>' + '</td>' +
+          ' type="button" class="btn btn-danger btn_delete">X</button>' + '</td>' /*+
           '<td>' + '<button' + ' id=' + '\"btn_convert_' + inspection.id + '\"' +
-          ' type="button" class="btn btn-primary btn_convert">Nacitaj data</button>' + '</td>' +
+          ' type="button" class="btn btn-primary btn_convert">Nacitaj data</button>' + '</td>'*/ +
           '</tr>'); 
       });
     },
