@@ -11,3 +11,5 @@ public class InspectionApplication {
 	}
 
 }
+
+//mvnw spring-boot:run
