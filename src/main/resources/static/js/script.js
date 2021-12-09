@@ -89,6 +89,7 @@ $(document).ready(function () {
 async function uploadFile(fileobj) {
   let formData = new FormData();
   formData.append("file", fileobj);
+  formData.append("inspectionId", -1);
   $.ajax({
     
     url: '/upload',

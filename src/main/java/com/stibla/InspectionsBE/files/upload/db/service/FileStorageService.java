@@ -12,8 +12,13 @@ import org.springframework.web.multipart.MultipartFile;
 import com.stibla.InspectionsBE.files.upload.db.model.FileDB;
 import com.stibla.InspectionsBE.files.upload.db.repository.FileDBRepository;
 
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
+
 @Service
 public class FileStorageService {
+
+  //private static final Logger logger = LoggerFactory.getLogger(FileStorageService.class);
 
   @Autowired
   private FileDBRepository fileDBRepository;
@@ -21,7 +26,7 @@ public class FileStorageService {
   public FileDB store(MultipartFile file, Long inspectionId) throws IOException {
     String fileName = StringUtils.cleanPath(file.getOriginalFilename());
     FileDB FileDB = new FileDB(fileName, file.getContentType(), file.getBytes(), inspectionId);
-
+    //logger.info("this is a info message inspectionId je " + inspectionId);
     return fileDBRepository.save(FileDB);
   }
 
