@@ -6,7 +6,7 @@ Trial Backend Aplication for Registry damage vehicle inspection to learning Spri
 - set datasource in aplication.properties
 - create DB 
 - mvnw spring-boot:run
-- see InspectionFE
+- see InspectionFE https://github.com/stibla/InspectionsFE
 
 # To Do
  - records of the repair shop and their contractual agreed conditions for inspection
